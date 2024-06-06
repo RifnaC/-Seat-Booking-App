@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 #root {
-  background-color: rgb(10, 10, 9);
+  background-color: rgb(17, 17, 17);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -13,21 +13,20 @@
 }
 .seminar-hall {
   display: flex;
-
   justify-content: center;
 }
 
 .seat-map {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 10px;
+  gap: 8px;
+  height: 100vh;
 }
 
 .seat {
   width: 40px;
   height: 40px;
-
-  background-color: rgb(12, 12, 12);
+  background-color: rgb(116, 117, 15);
   color: aliceblue;
   display: flex;
   align-items: center;
@@ -36,7 +35,8 @@
 }
 
 .seat.booked {
-  background-color: red;
+  background-color: rgb(201, 255, 4);
+  color: black;
   cursor: not-allowed;
 }
 
@@ -52,4 +52,9 @@
 .booking-form div {
   display: flex;
   flex-direction: column;
+}
+
+
+.seat:nth-child(20n ) {
+  margin-bottom: 20px;
 }
