@@ -5,7 +5,7 @@ import '../App.css';
 
 const SeminarHall = () => {
   const [seats, setSeats] = useState(
-    Array.from({ length: 100 }, (_, i) => ({
+    Array.from({ length: 50 }, (_, i) => ({
       seatNumber: i + 1,
       isBooked: false,
     }))

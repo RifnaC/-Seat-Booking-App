@@ -5,6 +5,7 @@
 }
 #root {
   background-color: rgb(17, 17, 17);
+  color: rgb(243, 243, 239);;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -14,20 +15,22 @@
 .seminar-hall {
   display: flex;
   justify-content: center;
+  object-fit: contain;
+  /* overflow:hidden ; */
 }
+
 
 .seat-map {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
-  height: 100vh;
 }
 
 .seat {
   width: 40px;
   height: 40px;
-  background-color: rgb(116, 117, 15);
-  color: aliceblue;
+  background-color: #ffbf00cc;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +38,7 @@
 }
 
 .seat.booked {
-  background-color: rgb(201, 255, 4);
+  background-color: #F94C10;
   color: black;
   cursor: not-allowed;
 }
@@ -53,8 +56,10 @@
   display: flex;
   flex-direction: column;
 }
+/* .seat:nth-child(5n) { */
+  /* margin-right: 120px; */
+/* } */
 
-
-.seat:nth-child(20n ) {
+/* .seat:nth-child(25n ) {
   margin-bottom: 20px;
-}
+} */

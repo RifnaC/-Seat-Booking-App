@@ -5,9 +5,9 @@ import SeminarHall from './components/SeminarHall'
 function App() {
 
   return (
-    <>
+    <div className='main'>
       <SeminarHall />
-    </>
+    </div>
   )
 }
 
