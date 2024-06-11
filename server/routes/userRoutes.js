@@ -5,6 +5,5 @@ import { isAuth } from "../middlewares/isAuth.js";
 
 router.post('/register', signup);
 router.post('/login', login);
-router.get('/', isAuth, getAllSeminars);
 
 export { router as userRouter }

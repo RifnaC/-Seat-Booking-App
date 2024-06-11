@@ -4,6 +4,7 @@ dotenv.config();
 import connetDB from './config/database.js'
 import { userRouter } from './routes/userRoutes.js'
 import cors from 'cors';
+import { seminarRouter } from './routes/seminar.js';
 
 const app = express();
 app.use(cors());
@@ -17,7 +18,8 @@ app.options('*', cors(corsOption));
 
 connetDB();
 
-app.use("/api/v1/user", userRouter)
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/seminar", seminarRouter);
 
 app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`));
 

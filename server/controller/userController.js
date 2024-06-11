@@ -45,14 +45,3 @@ export const login = async (req, res) => {
         return res.status(500).json({message: 'Internal server error'});
     }
 }
-
-export const getAllSeminars = async (req, res) => {
-    try {
-        const seminars = await User.find();
-        console.log(seminars)
-        return res.status(200).json({seminars});
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({message: 'Internal server error'});
-    }
-}
