@@ -6,15 +6,17 @@ import { userRouter } from './routes/userRoutes.js'
 import cors from 'cors';
 
 const app = express();
-connetDB();
-
+app.use(cors());
 app.use(express.json());
+const corsOption  ={
+    origin: ["http://localhost:5173"],
+    credentials: true
+}
+app.use(cors(corsOption));
+
+connetDB();
 
 app.use("/api/v1/user", userRouter)
 
 app.listen(process.env.PORT, () => console.log(`Server started on port ${process.env.PORT}`));
 
-app.use({
-    cors: ["http://localhost:4000"],
-    credentials: true
-});

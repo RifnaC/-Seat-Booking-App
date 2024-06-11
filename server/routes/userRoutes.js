@@ -1,9 +1,9 @@
 import express from 'express';
-import { login, signup } from '../controller/userController';
+import { getAllSeminars, login, signup } from '../controller/userController.js';
 const router = express.Router();
-import { verifyToken } from ('../middlewares/isAuth');
+import { verifyToken } from "../middlewares/isAuth.js";
 
-router.post('/signup', signup);
+router.post('/register', signup);
 router.post('/login', login);
-router.get('/', verifyToken);
+router.get('/', verifyToken, getAllSeminars);
 export { router as userRouter }
