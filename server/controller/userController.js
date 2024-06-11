@@ -39,7 +39,7 @@ export const login = async (req, res) => {
             return res.status(401).json({message: 'Invalid password'});
         }
         const token = jwt.sign({userId: user._id, email: user.email}, process.env.JWT_SECRET, {expiresIn: '1h'});
-        return res.status(200).json({message: "Login successfull"})
+        return res.status(200).json({ token, user });
     } catch (error) {
         console.error(error)
         return res.status(500).json({message: 'Internal server error'});
@@ -49,6 +49,7 @@ export const login = async (req, res) => {
 export const getAllSeminars = async (req, res) => {
     try {
         const seminars = await User.find();
+        console.log(seminars)
         return res.status(200).json({seminars});
     } catch (error) {
         console.error(error);

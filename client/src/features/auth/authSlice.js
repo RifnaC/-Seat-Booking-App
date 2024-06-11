@@ -8,15 +8,6 @@ const initialState = {
   status: 'idle',
   error: null,
 };
-export const validateToken = createAsyncThunk('auth/validateToken', async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/api/v1/user/');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  });
-
 export const registerUser = createAsyncThunk('auth/registerUser', async (credentials, thunkAPI) => {
     const {name, email, password, confirmPassword, navigate } = credentials;
   try {
@@ -41,6 +32,16 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, 
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });
+
+export const validateToken = createAsyncThunk('auth/validateToken', async (token, thunkAPI) => {
+    try {
+      const response = await axios.get('/api/v1/user');
+      console.log(response)
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  });
 
 const authSlice = createSlice({
     name: 'auth',

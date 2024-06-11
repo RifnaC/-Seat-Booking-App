@@ -1,16 +1,18 @@
-import  JsonWebToken  from "jsonwebtoken";
+import  jwt  from "jsonwebtoken";
+import User from "../modal/user.js";
 
-export const verityToken = (req, res, next) => {
+export const verityToken = async(req, res, next) => {
+  let token;
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
-        const token = req.headers.authorization.split(" ")[1];
-        if(!token){
-            return res.status(401).json({error: "Unauthorized"})
-        }
-        const decoded = JsonWebToken.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
+      token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, JWT_SECRET);
+      req.user = await User.findById(decoded.userId).select('-password');
+      next();
     } catch (error) {
-        console.error(error)
-        return res.status(500).json({error: "Error in verifying token"});
+      res.status(401).json({ message: 'Not authorized, token failed' });
     }
-}
+  }
+};
+
+export { verityToken as isAuth } 

@@ -9,10 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const corsOption  ={
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "http://localhost:3000"],
     credentials: true
 }
 app.use(cors(corsOption));
+app.options('*', cors(corsOption));
 
 connetDB();
 
