@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSeminars } from '../features/seminar/seminarSlice';
 import { useNavigate } from 'react-router-dom';
+import '../App.css'
 
 const SeminarList = () => {
   const dispatch = useDispatch();
@@ -14,25 +15,28 @@ const SeminarList = () => {
   }, [status, dispatch]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <div className='text-white'>Loading...</div>;
   }
 
   if (status === 'failed') {
-    return <div>Error: {error}</div>;
+    return <div className='text-red-600'>Error: {error}</div>;
   }
   return (
-    <div>
-      <h2>Seminars</h2>
-      <ul>
+    <div className='text-white w-screen'>
+      <h2 className='text-2xl font-bold text-center my-5'>Seminars</h2>
+      <ul className='flex justify-around items-start'>
         {seminars.map((seminar) => (
-          <li key={seminar._id} onClick={() => navigate(`/seminar/${seminar._id}`)}>
-            <img src={seminar.image} alt={seminar.title} />
-            <h3>{seminar.title}</h3>
-            <p>{new Date(seminar.date).toLocaleDateString()}</p>
+          <li className='text-center' key={seminar._id} onClick={() => navigate(`/seminar/${seminar._id}`)}>
+            <img className='w-80 h-60' src={seminar.image} alt={seminar.title} />
+            <div className='flex justify-between'>
+              <h3>{seminar.title}</h3>
+              <p>Launching On {new Date(seminar.date).toLocaleDateString()}</p>
+            </div>
           </li>
-        ))}
-      </ul>
-    </div>
+  ))
+}
+      </ul >
+    </div >
   );
 };
 

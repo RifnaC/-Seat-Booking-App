@@ -10,26 +10,33 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [err, setErr] = useState('')
   const dispatch = useDispatch();
   const { status, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(name.length < 3) return setErr("Enter valid name!");
+    if(!email.includes('@') || !email.includes(".")) return setErr("Enter valid email!");
+    if(password.length < 6) return setErr("password should contain atleast 6 characters!");
+    if(password !== confirmPassword) return setErr("Password and confirm password should be same!")
     dispatch(registerUser({name, email, password, confirmPassword, navigate }));
+    setErr("")
   };
 
   return (
-    <div className=' bg-yellow-400 h-72 w-1/3 '>
+    <div className=' bg-yellow-100 h-96 w-1/4 '>
       <h2 className='text-center text-2xl font-bold text-black my-3'>Register</h2>
-      {status === 'loading' && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      <form className='register flex justify-center items-center' onSubmit={handleSubmit}>
+      {status === 'loading' && <p className='text-center'>Loading...</p>}
+      {error && <p className='text-center text-red-600'>Error: {error.message}</p>}
+      {err && <p className='text-center text-red-600'>Error: {err}</p>}
+      <form className='register flex justify-center items-center mt-8' onSubmit={handleSubmit}>
       <input
           type="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="name"
+          placeholder="Name"
         />
         <input
           type="email"
@@ -47,7 +54,7 @@ const Register = () => {
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Confirm Password"
         />
         <button type="submit" disabled={status === 'loading'}>Register</button>
       </form>

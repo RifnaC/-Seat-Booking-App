@@ -5,7 +5,7 @@
 }
 #root {
   background-color: rgb(17, 17, 17);
-  color: rgb(243, 243, 239);;
+  color: rgb(0, 0, 0);;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -59,6 +59,7 @@
 .register{
   display: flex;
   flex-direction: column;
+  color: black;
 }
 .register input{
   margin-bottom: 10px;
@@ -67,9 +68,10 @@
 .register button{
   margin-top: 10px;
   padding: 8px;
-  background-image: linear-gradient(to right, #dfc42a 0%, #bac934  51%, #d4e210  100%);
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f  51%, #ffecd2  100%);
+  font-weight: bold;
   color: black;
-  border: none;
+  border: solid 2px black;
   cursor: pointer;
 }
 /* .seat:nth-child(5n) { */

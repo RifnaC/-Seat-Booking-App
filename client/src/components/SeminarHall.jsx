@@ -1,7 +1,7 @@
 // import  { useState } from 'react';
 // import SeatMap from './SeatMap';
 // import BookingForm from './BookingForm';
-// import '../App.css'; 
+
 
 // const SeminarHall = () => {
 //   const [seats, setSeats] = useState(
@@ -44,6 +44,7 @@ import { useParams } from 'react-router-dom';
 import axios from '../api/axiosConfig';
 import SeatMap from './SeatMap';
 import BookingForm from './BookingForm';
+import '../App.css';
 
 const SeminarHall = () => {
   const { seminarId } = useParams();
@@ -55,7 +56,7 @@ const SeminarHall = () => {
     const fetchSeminar = async () => {
       try {
         setStatus('loading');
-        console.log(`Fetching seminar with ID: ${seminarId}`); // Log seminar ID
+        console.log(`Fetching seminar with ID: ${seminarId}`);
         const response = await axios.get(`/api/v1/seminar/${seminarId}`);
         setSeminar(response.data);
         setStatus('succeeded');
@@ -70,21 +71,24 @@ const SeminarHall = () => {
   }, [seminarId]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <div className='text-white'>Loading...</div>;
   }
 
   if (status === 'failed') {
-    return <div>Error: {error}</div>;
+    return <div className='text-red-600'>Error: {error}</div>;
   }
-console.log(seminar)
   return (
-    <div>
+    <div className=' text-white '>
       {seminar && (
         <>
-          <h2>{seminar.title}</h2>
-          <p>{new Date(seminar.date).toLocaleDateString()}</p>
-          <SeatMap bookedSeats={seminar.bookedSeats} />
-          <BookingForm seminarId={seminar._id} />
+          <div className='flex justify-center my-5'>
+            <h2>{seminar.title}</h2>
+            <input type='date' className='mx-4 text-black'/>
+          </div>
+          <div className='flex w-screen justify-evenly'>
+            <SeatMap bookedSeats={seminar.bookedSeats} />
+            <BookingForm seminarId={seminar._id} />
+          </div>
         </>
       )}
     </div>
