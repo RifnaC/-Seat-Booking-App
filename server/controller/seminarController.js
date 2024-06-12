@@ -4,24 +4,24 @@ import { Seminar } from '../modal/seminar.js';
 export const getAllSeminars = async (req, res) => {
     try {
         const seminars = await Seminar.find();
-        return res.status(200).json({seminars});
+        return res.status(200).json(seminars);
     } catch (error) {
         console.error(error)
         return res.status(500).json({message: 'Internal server error'});
     }
 }
+
 export const getSeminarById = async (req, res) => {
     try {
         const seminar = await Seminar.findById(req.params.id);
-        return res.status(200).json({seminar});
+        return res.status(200).json(seminar);
     } catch (error) {
         console.error(error)
         return res.status(500).json({message: 'Internal server error'});
     }
 }
+
 export const bookSeat =async (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
     const { seminarId, seat } = req.body;
     try {
       const seminar = await Seminar.findById(seminarId);

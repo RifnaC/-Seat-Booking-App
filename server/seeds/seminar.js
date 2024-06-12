@@ -6,7 +6,6 @@ const seminars = [
     description: 'Description for Seminar 1',
     image: 'image-url-1',
     date: new Date('2024-07-01'),
-    seats: 10,
     bookedSeats: ['C3'],
   },
   {
@@ -14,7 +13,6 @@ const seminars = [
     description: 'Description for Seminar 2',
     image: 'image-url-2',
     date: new Date('2024-07-15'),
-    seats: 10,
     bookedSeats: ['A1', 'B2']
   },
 ];

@@ -9,6 +9,6 @@ router.get('/', isAuth, getAllSeminars);
 
 // Book a seat for a seminar
 router.get('/:id', isAuth, getSeminarById);
-router.post('/:id', isAuth, bookSeat);
+router.post('/book-seat', isAuth, bookSeat);
 
 export { router as seminarRouter };

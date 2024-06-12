@@ -17,10 +17,6 @@ const seminarSchema = new mongoose.Schema({
         type: Date, 
         required: true 
     },
-    seats: { 
-        type: Number, 
-        required: true 
-    },
     bookedSeats: [{
         type: String, 
         required: true 
