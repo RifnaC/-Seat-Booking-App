@@ -13,6 +13,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginUser({ email, password, navigate }));
+    console.log('Token after login:', localStorage.getItem('token'))
   };
 
   return (

@@ -1,10 +1,10 @@
-import { Seminar } from '../modal/seminar';
-import { isAuth } from '../middlewares/isAuth';
+import { Seminar } from '../modal/seminar.js';
 
 
 export const getAllSeminars = async (req, res) => {
     try {
         const seminars = await Seminar.find();
+        console.log(seminars);
         return res.status(200).json({seminars});
     } catch (error) {
         console.error(error)

@@ -1,6 +1,5 @@
 import express from 'express';
-import { Seminar } from '../modal/seminar';
-import { isAuth } from '../middlewares/isAuth';
+import { isAuth } from '../middlewares/isAuth.js';
 import { bookSeat, getAllSeminars } from '../controller/seminarController.js';
 
 const router = express.Router();

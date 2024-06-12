@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Seminar from '../models/Seminar';
+import Seminar from '../models/Seminar.js';
 
 const seminars = [
       {

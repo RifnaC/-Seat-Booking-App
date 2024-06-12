@@ -7,6 +7,7 @@ import {store} from '../src/app/store'
 import Register from './components/Register'
 import ProtectedRoute from './components/ProtectRoute'
 import Login from './components/Login'
+import SeminarList from './components/SeminarList'
 
 function App() {
 
@@ -16,11 +17,19 @@ function App() {
         <Routes >
           <Route path='/register' element={<Register/> } />
           <Route path='/login' element={<Login/> } />
-          <Route path='/' element={
+          <Route path='/seminars' element={
             <ProtectedRoute>
-              <SeminarHall/>
+              <SeminarList />
             </ProtectedRoute>
             }/>
+            <Route
+            path="/seminars/:seminarId"
+            element={
+              <ProtectedRoute>
+                <SeminarHall />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
          {/* <div className='main'>
