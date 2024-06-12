@@ -1,21 +1,18 @@
-// src/features/seminars/seminarSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../api/axiosConfig';
 
 const initialState = {
   seminars: [],
-  token: localStorage.getItem('token'),
   status: 'idle',
   error: null,
 };
 
 export const fetchSeminars = createAsyncThunk('seminar/fetchSeminars', async () => {
-    console.log()
   try {
     const response = await axios.get('/api/v1/seminar');
     return response.data;
   } catch (error) {
-    
+    console.error('Error fetching seminars:', error.response.data)
       throw error.response.data;
   }
 });

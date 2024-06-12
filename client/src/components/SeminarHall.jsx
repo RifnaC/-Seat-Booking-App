@@ -56,7 +56,7 @@ const SeminarHall = () => {
     const fetchSeminar = async () => {
       try {
         setStatus('loading');
-        const response = await axios.get(`/api/seminars/${seminarId}`);
+        const response = await axios.get(`/api/v1/seminar/${seminarId}`);
         setSeminar(response.data);
         setStatus('succeeded');
       } catch (err) {
@@ -75,6 +75,7 @@ const SeminarHall = () => {
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
+  console.log(seminar)
 
   return (
     <div>

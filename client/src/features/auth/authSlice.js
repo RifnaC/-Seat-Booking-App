@@ -24,8 +24,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, 
     const response = await axios.post('api/v1/user/login', { email, password });
     const { token, user } = response.data;
     localStorage.setItem('token', response.data.token)
-    console.log('Stored token:', localStorage.getItem('token')); // Verify token storage
-    navigate('/seminars');
+    navigate('/seminar');
     return { token, user };
 
   } catch (error) {
@@ -35,8 +34,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, 
 
 export const validateToken = createAsyncThunk('auth/validateToken', async (token, thunkAPI) => {
     try {
-      const response = await axios.get('/api/v1/user');
-      console.log(response)
+      const response = await axios.get('/api/v1/seminar');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -51,7 +49,6 @@ const authSlice = createSlice({
         localStorage.removeItem('token');
         state.user = null;
         state.token = null;
-        localStorage.removeItem('token');
       },
     },
     extraReducers: (builder) => {

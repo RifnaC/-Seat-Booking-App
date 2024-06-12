@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import connetDB from './config/database.js'
+import seedSeminars from './seeds/seminar.js';
 import { userRouter } from './routes/userRoutes.js'
 import cors from 'cors';
 import { seminarRouter } from './routes/seminar.js';
@@ -17,6 +18,7 @@ app.use(cors(corsOption));
 app.options('*', cors(corsOption));
 
 connetDB();
+seedSeminars();
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/seminar", seminarRouter);
