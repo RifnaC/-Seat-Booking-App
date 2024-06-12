@@ -7,7 +7,6 @@ const SeminarList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { seminars, status, error } = useSelector((state) => state.seminar);
-
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchSeminars());
@@ -21,12 +20,11 @@ const SeminarList = () => {
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
-
   return (
     <div>
       <h2>Seminars</h2>
       <ul>
-        {seminars.seminars.map((seminar) => (
+        {seminars.map((seminar) => (
           <li key={seminar._id} onClick={() => navigate(`/seminar/${seminar._id}`)}>
             <img src={seminar.image} alt={seminar.title} />
             <h3>{seminar.title}</h3>

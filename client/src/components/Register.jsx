@@ -20,11 +20,11 @@ const Register = () => {
   };
 
   return (
-    <div >
-      <h2>Register</h2>
+    <div className=' bg-yellow-400 h-72 w-1/3 '>
+      <h2 className='text-center text-2xl font-bold text-black my-3'>Register</h2>
       {status === 'loading' && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
-      <form className='register' onSubmit={handleSubmit}>
+      <form className='register flex justify-center items-center' onSubmit={handleSubmit}>
       <input
           type="name"
           value={name}

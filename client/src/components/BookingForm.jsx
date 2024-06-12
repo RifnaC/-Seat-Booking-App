@@ -64,9 +64,10 @@ const BookingForm = ({ seminarId }) => {
     e.preventDefault();
     try {
       setStatus('loading');
-      await axios.post('/api/seminars/book-seat', { seminarId, seat });
+      await axios.post('/api/v1/seminar/book-seat', { seminarId, seat });
       setStatus('succeeded');
-      dispatch(fetchSeminars()); // Refresh seminars data
+      dispatch(fetchSeminars());
+      
     } catch (err) {
       setError(err.message);
       setStatus('failed');
@@ -79,8 +80,9 @@ const BookingForm = ({ seminarId }) => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleBooking}>
         <input
+
           type="text"
-          value={seat}
+          value={seat.toUpperCase()}
           onChange={(e) => setSeat(e.target.value)}
           placeholder="Enter seat number"
           required

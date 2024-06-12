@@ -39,7 +39,6 @@
 
 // export default SeminarHall;
 
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../api/axiosConfig';
@@ -56,11 +55,13 @@ const SeminarHall = () => {
     const fetchSeminar = async () => {
       try {
         setStatus('loading');
+        console.log(`Fetching seminar with ID: ${seminarId}`); // Log seminar ID
         const response = await axios.get(`/api/v1/seminar/${seminarId}`);
         setSeminar(response.data);
         setStatus('succeeded');
       } catch (err) {
         setError(err.message);
+        console.log(err);
         setStatus('failed');
       }
     };
@@ -75,8 +76,7 @@ const SeminarHall = () => {
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
-  console.log(seminar)
-
+console.log(seminar)
   return (
     <div>
       {seminar && (
@@ -92,4 +92,5 @@ const SeminarHall = () => {
 };
 
 export default SeminarHall;
+
 

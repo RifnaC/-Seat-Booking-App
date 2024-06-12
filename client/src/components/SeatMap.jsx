@@ -25,27 +25,27 @@
 
 
 
-const SeatMap = ({ bookedSeats }) => {
-  console.log(bookedSeats)
+const SeatMap = ({ bookedSeats  }) => {
+  console.log('Booked Seats:', bookedSeats);
   const seats = [
-    'A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 
+    'A1', 'A2', 'A3', 'A4', 'A5','B1', 'B2', 'B3', 'B4', 'B5', 'C1', 'C2', 'C3', 'C4', 'C5'
   ];
 
   return (
     <div>
       <h3>Seat Map</h3>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 50px)', gap: '10px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 50px)', gap: '10px' }}>
         {seats.map((seat) => (
           <div
             key={seat}
             style={{
               width: '50px',
               height: '50px',
-              backgroundColor: bookedSeats.includes(seat) ? 'red' : 'green',
+              backgroundColor:bookedSeats.includes(seat) ? "red": 'green',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              cursor: bookedSeats.includes(seat) ? 'not-allowed' : 'pointer',
+              cursor: bookedSeats.includes(seat) ? "not-allowed":'pointer',
             }}
           >
             {seat}

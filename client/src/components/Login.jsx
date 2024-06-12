@@ -16,7 +16,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
       <h2>Login</h2>
       {status === 'loading' && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
