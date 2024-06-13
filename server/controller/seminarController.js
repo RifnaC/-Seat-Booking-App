@@ -22,16 +22,25 @@ export const getSeminarById = async (req, res) => {
 }
 
 export const bookSeat =async (req, res) => {
-    const { seminarId, seat } = req.body;
+    const { seminarId, seat, date } = req.body;
     try {
       const seminar = await Seminar.findById(seminarId);
       if (!seminar) {
         return res.status(404).json({ message: 'Seminar not found' });
       }
-      if (seminar.bookedSeats.includes(seat)) {
-        return res.status(400).json({ message: 'Seat already booked' });
+      const booked =  seminar.bookings.filter(booking => {
+        return booking.bookedSeats.includes(seat) && new Date(booking.date).toISOString().split('T')[0] === date 
+      });
+
+      if(booked.length > 0) {
+        return res.status(400).json({ message: 'Seat already booked'});
       }
-      seminar.bookedSeats.push(seat);
+      seminar.bookings.filter(booking =>{
+        if (new Date(booking.date).toISOString().split('T')[0] === date) {
+          booking.bookedSeats.push(seat);
+        }
+      });
+      seminar.bookings.push({ date, bookedSeats: [seat] });
       await seminar.save();
       res.status(200).json({ message: 'Seat booked successfully' });
     } catch (error) {
@@ -39,3 +48,21 @@ export const bookSeat =async (req, res) => {
     }
   };
 
+
+
+export const getBookingsByDate = async (req, res) => {
+    const { seminarId } = req.params;
+    const { date } = req.query;
+    try {
+      const seminar = await Seminar.findById(seminarId);
+      const bookings = seminar.bookings.filter((booking) => {
+        new Date(booking.date).toISOString().split('T')[0] == date 
+        return booking.bookedSeats ;
+      });
+      const bookedSeats = bookings.map((booking) => booking.bookedSeats).flat();
+      console.log(bookedSeats)
+      res.json(bookedSeats);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching bookings' });
+    }
+  }

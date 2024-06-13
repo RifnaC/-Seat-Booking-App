@@ -29,8 +29,7 @@ const SeminarList = () => {
           <li className='text-center' key={seminar._id} onClick={() => navigate(`/seminar/${seminar._id}`)}>
             <img className='w-80 h-60' src={seminar.image} alt={seminar.title} />
             <div className='flex justify-between'>
-              <h3>{seminar.title}</h3>
-              <p>Launching On {new Date(seminar.date).toLocaleDateString()}</p>
+              <h3 className='my-3 mx-auto'>{seminar.title}</h3>
             </div>
           </li>
   ))

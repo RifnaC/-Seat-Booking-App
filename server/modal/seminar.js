@@ -13,14 +13,17 @@ const seminarSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    date: { 
-        type: Date, 
-        required: true 
-    },
-    bookedSeats: [{
-        type: String, 
-        required: true 
-    }],
+    bookings: [{
+        date: { 
+            type: Date, 
+            required: true 
+        },
+        bookedSeats: [{
+            type: String, 
+            required: true 
+        }],
+    }]
+    
 });
 
 const Seminar = mongoose.model('Seminar', seminarSchema);

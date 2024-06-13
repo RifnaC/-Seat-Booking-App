@@ -1,61 +1,12 @@
 /* eslint-disable react/prop-types */
-// /* eslint-disable react/prop-types */
-// import { useState } from 'react';
-
-// const BookingForm = ({ selectedSeat, onSubmit }) => {
-//   const [name, setName] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [date, setDate] = useState('');
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (selectedSeat !== null) {
-//       const booking = {
-//         name,
-//         email,
-//         date,
-//         seats: [selectedSeat]
-//       };
-//       onSubmit(booking);
-//       setName('');
-//       setEmail('');
-//       setDate('');
-//     } else {
-//       alert('Please select a seat first.');
-//     }
-//   };
-
-//   return (
-//     <form className="booking-form" onSubmit={handleSubmit}>
-//       <div>
-//         <label>Name:</label>
-//         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-//       </div>
-//       <div>
-//         <label>Email:</label>
-//         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-//       </div>
-//       <div>
-//         <label>Date:</label>
-//         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-//       </div>
-//       {selectedSeat && <p>Selected Seat: {selectedSeat}</p>}
-//       <button type="submit">Book Seat</button>
-//     </form>
-//   );
-// };
-
-// export default BookingForm;
-
-
-// src/components/BookingForm.js
 import { useState } from 'react';
 import axios from '../api/axiosConfig';
 import { useDispatch } from 'react-redux';
 import { fetchSeminars } from '../features/seminar/seminarSlice';
 
-const BookingForm = ({ seminarId }) => {
-  const [seat, setSeat] = useState('');
+
+const BookingForm = ({ seminarId, selectedSeat, onBookingSuccess, selectedDate }) => {
+
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
@@ -64,13 +15,14 @@ const BookingForm = ({ seminarId }) => {
     e.preventDefault();
     try {
       setStatus('loading');
-      await axios.post('/api/v1/seminar/book-seat', { seminarId, seat }).then((response)=>{
-        console.log(response)
-        setStatus('succeeded');
-        dispatch(fetchSeminars());
-      })
-      
-      
+      await axios.post('/api/v1/seminar/book-seat', {
+        seminarId,
+        seat: selectedSeat,
+        date: selectedDate,
+      });
+      setStatus('succeeded');
+      dispatch(fetchSeminars());
+      onBookingSuccess(selectedSeat);
     } catch (err) {
       setError(err.message);
       setStatus('failed');
@@ -78,18 +30,10 @@ const BookingForm = ({ seminarId }) => {
   };
 
   return (
-    <div>
-      <h3>Book a Seat</h3>
+    <div className='text-white'>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleBooking}>
-        <input
-          className='p-1 border-2 border-yellow-200 text-black'
-          type="text"
-          value={seat.toUpperCase()}
-          onChange={(e) => setSeat(e.target.value)}
-          placeholder="Enter seat number"
-          required
-        />
+      <form onSubmit={handleBooking} className='border-2 flex'>
+        <p className='p-1'>Selected Seat: {selectedSeat}</p>
         <button className='border-2 text-black border-yellow-200 bg-gradient-to-br from-yellow-200 to-yellow-300 p-1'  type="submit" disabled={status === 'loading'}>
           Book
         </button>
