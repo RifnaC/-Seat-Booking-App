@@ -18,7 +18,7 @@ app.use(cors(corsOption));
 app.options('*', cors(corsOption));
 
 connetDB();
-seedSeminars();
+// seedSeminars();
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/seminar", seminarRouter);

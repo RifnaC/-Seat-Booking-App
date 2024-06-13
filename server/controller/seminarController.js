@@ -56,8 +56,9 @@ export const getBookingsByDate = async (req, res) => {
     try {
       const seminar = await Seminar.findById(seminarId);
       const bookings = seminar.bookings.filter((booking) => {
-        new Date(booking.date).toISOString().split('T')[0] == date 
-        return booking.bookedSeats ;
+        console.log(new Date(booking.date).toISOString().split('T')[0] === date)
+        if(new Date(booking.date).toISOString().split('T')[0] === date) return booking.bookedSeats
+        else return null
       });
       const bookedSeats = bookings.map((booking) => booking.bookedSeats).flat();
       console.log(bookedSeats)
